@@ -1,0 +1,24 @@
+[project]
+name = "mini-deepresearch"
+version = "0.1.0"
+description = "基于OpenAI Agents SDK的研究助手系统，自动进行网络搜索并生成详细的研究报告"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "openai-agents-sdk>=0.1.0",
+    "pydantic>=2.0.0",
+]
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+keywords = ["ai", "research", "openai", "agents", "deepresearch"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
