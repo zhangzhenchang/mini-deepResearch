@@ -6,9 +6,13 @@ Mini DeepResearch - 基于OpenAI Agents SDK的研究助手
 import asyncio
 import os
 import time
+from dotenv import load_dotenv
 from pydantic import BaseModel
 from agents import Agent, WebSearchTool, Runner
 from agents.model_settings import ModelSettings
+
+# 加载环境变量
+load_dotenv()
 
 
 # ==================== 数据模型定义 ====================
@@ -51,7 +55,7 @@ PLANNER_PROMPT = (
 planner_agent = Agent(
     name="PlannerAgent",
     instructions=PLANNER_PROMPT,
-    model="o4-mini",
+    model="qwen-plus",
     output_type=WebSearchPlan,
 )
 
@@ -89,7 +93,7 @@ WRITER_PROMPT = (
 writer_agent = Agent(
     name="WriterAgent",
     instructions=WRITER_PROMPT,
-    model="o4-mini",
+    model="qwen-plus",
     output_type=ReportData,
 )
 
