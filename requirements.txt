@@ -1,3 +1,0 @@
-openai-agents-sdk
-pydantic
-asyncio

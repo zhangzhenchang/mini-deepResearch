@@ -52,3 +52,6 @@ htmlcov/
 # uv
 .uv/
 uv.lock
+
+# Claude Code local settings
+.claude/

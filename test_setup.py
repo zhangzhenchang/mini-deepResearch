@@ -10,12 +10,12 @@ def check_python_version():
     """检查Python版本"""
     print("检查Python版本...")
     version = sys.version_info
-    if version.major >= 3 and version.minor >= 8:
+    if version.major >= 3 and version.minor >= 10:
         print(f"✓ Python版本: {version.major}.{version.minor}.{version.micro}")
         return True
     else:
         print(f"✗ Python版本过低: {version.major}.{version.minor}.{version.micro}")
-        print("  需要Python 3.8或更高版本")
+        print("  需要Python 3.10或更高版本")
         return False
 
 
@@ -23,20 +23,19 @@ def check_dependencies():
     """检查依赖包"""
     print("\n检查依赖包...")
     required_packages = {
-        "agents": "openai-agents-sdk",
+        "langchain": "langchain",
+        "langchain_openai": "langchain-openai",
+        "langchain_community": "langchain-community",
+        "duckduckgo_search": "ddgs",
         "pydantic": "pydantic",
+        "dotenv": "python-dotenv",
         "asyncio": "asyncio (内置)"
     }
 
     all_installed = True
     for module, package in required_packages.items():
         try:
-            if module == "asyncio":
-                import asyncio
-            elif module == "agents":
-                import agents
-            elif module == "pydantic":
-                import pydantic
+            __import__(module)
             print(f"✓ {package} 已安装")
         except ImportError:
             print(f"✗ {package} 未安装")
@@ -46,24 +45,37 @@ def check_dependencies():
 
 
 def check_api_key():
-    """检查API密钥"""
-    print("\n检查API密钥...")
-    api_key = os.environ.get("OPENAI_API_KEY")
+    """检查API密钥及接口地址"""
+    print("\n检查API配置...")
+    from dotenv import load_dotenv
+    load_dotenv()
 
+    passed = True
+
+    api_key = os.environ.get("OPENAI_API_KEY")
     if api_key:
         masked_key = api_key[:8] + "..." + api_key[-4:] if len(api_key) > 12 else "***"
         print(f"✓ OPENAI_API_KEY 已设置: {masked_key}")
-        return True
     else:
         print("✗ OPENAI_API_KEY 未设置")
-        print("  请设置环境变量: export OPENAI_API_KEY='your-key'")
-        return False
+        print("  请在 .env 文件中设置: OPENAI_API_KEY=sk-xxxxxxxx")
+        passed = False
+
+    base_url = os.environ.get("OPENAI_BASE_URL")
+    if base_url:
+        print(f"✓ OPENAI_BASE_URL 已设置: {base_url}")
+    else:
+        print("✗ OPENAI_BASE_URL 未设置")
+        print("  请在 .env 文件中设置: OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1")
+        passed = False
+
+    return passed
 
 
 def check_file_structure():
     """检查文件结构"""
     print("\n检查文件结构...")
-    required_files = ["main.py", "requirements.txt", "README.md"]
+    required_files = ["main_langchain.py", ".env", "README.md"]
 
     all_exist = True
     for file in required_files:
@@ -101,16 +113,15 @@ def main():
 
     print("\n" + "=" * 50)
     if all_passed:
-        print("✓ ��有检查通过！可以开始使用。")
+        print("✓ 所有检查通过！可以开始使用。")
         print("\n运行示例:")
-        print("  python main.py")
-        print("  python example.py")
+        print("  uv run main_langchain.py")
     else:
         print("✗ 部分检查失败，请根据上述提示修复问题。")
         print("\n安装依赖:")
-        print("  pip install -r requirements.txt")
-        print("\n设置API密钥:")
-        print("  export OPENAI_API_KEY='your-key'")
+        print("  uv sync")
+        print("\n配置API:")
+        print("  cp .env.example .env  # 然后填入阿里云 API Key 和 Base URL")
     print("=" * 50)
 
 

@@ -3,7 +3,7 @@
 """
 
 import asyncio
-from main import ResearchManager
+from main_langchain import ResearchManager
 
 
 async def example_1():
