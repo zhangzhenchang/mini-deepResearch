@@ -27,11 +27,11 @@ writer_chain（综合所有摘要，撰写最终报告）
 Markdown 研究报告（自动保存）
 ```
 
-| Agent | 职责 |
-|-------|------|
+| Agent           | 职责                                             |
+| --------------- | ------------------------------------------------ |
 | `planner_chain` | 接收用户查询，输出结构化搜索计划 `WebSearchPlan` |
-| `search_chain` | 执行 DuckDuckGo 搜索，生成 300 字内摘要 |
-| `writer_chain` | 综合所有摘要，撰写 1500 字以上 Markdown 报告 |
+| `search_chain`  | 执行 DuckDuckGo 搜索，生成 300 字内摘要          |
+| `writer_chain`  | 综合所有摘要，撰写 1500 字以上 Markdown 报告     |
 
 ## 环境要求
 
@@ -211,7 +211,3 @@ A: 减少 `planner_chain` 提示词中的搜索数量，或将模型改为 `qwen
 
 **Q: 报告保存在哪里？**  
 A: 保存在项目根目录下的 `research_reports/` 文件夹，文件名包含查询关键词。
-
-## 许可证
-
-本项目基于课程《2025大模型Agent智能体开发实战》的示例代码改编。
