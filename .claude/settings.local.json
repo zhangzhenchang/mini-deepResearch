@@ -8,7 +8,12 @@
       "Bash(uv sync *)",
       "Bash(python *)",
       "Bash(uv run *)",
-      "Bash(sleep 10 jobs cat research_reports/*.md)"
+      "Bash(sleep 10 jobs cat research_reports/*.md)",
+      "WebFetch(domain:juejin.cn)",
+      "Bash(gh repo *)",
+      "Bash(git rm *)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }
